@@ -1,13 +1,14 @@
-import React from "react"
+import React from "react";
+import BlogPosts from '../components/BlogPosts';
 
 
 function App() {
   
 
   return (
-    <>
-      <h1>Hello</h1>
-    </>
+    <div>
+      <BlogPosts />
+    </div>
   )
 }
 
