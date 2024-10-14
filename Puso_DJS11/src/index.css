@@ -25,6 +25,8 @@ a:hover {
 body {
   margin: 0;
   display: flex;
+  justify-content: center;
+  text-align: center;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -65,4 +67,42 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/*_________________________________
+CAOUSAL FOR PODCASTS DISPLAYED
+___________________________________*/
+
+.carousel {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.arrow {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: row;
+  transition: transform 0.5s ease;
+}
+
+.list-style {
+  list-style: none;
+  text-align: center;
+  width: 350px; /* Adjust as needed */
+}
+
+/* 
+- Instead of adding size on BlogPost.jsx
+- This seems cleaner and better maintainable 
+*/
+.podcast-image {
+  width: 300px;
+  height: 300px;
 }
