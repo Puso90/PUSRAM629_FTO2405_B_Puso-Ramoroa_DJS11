@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import  SearchBar  from "/components/SearchBar.jsx";
-import { SearchResultsList } from "./SearchResultsList";
+import SearchBar from "/components/Search/searchbar.jsx"; 
+import { SearchResultsList } from "./Search/SearchResultsList";
 
 export default function Header() {
     
