@@ -111,6 +111,7 @@ ___________________________________*/
 }
 
 /*_____________________________
+HEADER & FOOTER
 _____________________________*/
 
 footer {
@@ -121,6 +122,16 @@ footer {
   flex-shrink: 0;
   justify-content: center;
   align-items: center;
+  margin-top: auto;
+  font-weight: 500;
+}
+
+header {
+  background-color: #ac0c0c;
+  color: #ffffff;
+  height: 74px;
+  display: flex;
+  flex-direction: row;
   margin-top: auto;
   font-weight: 500;
 }
