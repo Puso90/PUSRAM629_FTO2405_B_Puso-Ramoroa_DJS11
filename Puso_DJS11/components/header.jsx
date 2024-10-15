@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import  SearchBar  from "/components/SearchBar.jsx";
-
+import { SearchResultsList } from "./SearchResultsList";
 
 export default function Header() {
     
+    const [results, setResults] = useState([]);
 
     
 
     return (
         <header>
-            
             <nav className="nav-bar">
 
             <div className="div-app-name">
@@ -17,8 +17,8 @@ export default function Header() {
                 </div>
                 
                 <div className="search-bar-container">
-                    <SearchBar />
-                    <div>Search Results</div>
+                    <SearchBar setResults={setResults}/>
+                    <SearchResultsList results={results}/>
                 </div>
 
                 

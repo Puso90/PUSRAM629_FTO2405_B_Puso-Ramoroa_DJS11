@@ -5,7 +5,7 @@ import "./SearchBar.css"
 
 
 
-export default function SearchBar() {
+export default function SearchBar({ setResults }) {
     const [input, setInput] = useState("")
 
     /* Fetching Api data for the search element */
@@ -17,7 +17,10 @@ export default function SearchBar() {
             const results = json.filter((post) => {
                 return value && post && post.title && post.title.toLowerCase().includes(value);
             })
+    // Leaving the log for demonstration purposes
+    // Although it will also be self evident on UI, hopefully
             console.log(results)
+            setResults(results)
         })
         
     }
