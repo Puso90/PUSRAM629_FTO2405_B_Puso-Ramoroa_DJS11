@@ -13,7 +13,11 @@ export default function SearchBar() {
         fetch("https://podcast-api.netlify.app")
         .then((response) => response.json())
         .then(json => {
-            console.log(json)
+    // works and when console logged out it acurately returns results
+            const results = json.filter((post) => {
+                return post && post.title && post.title.toLowerCase().includes(value);
+            })
+            console.log(results)
         })
         
     }
