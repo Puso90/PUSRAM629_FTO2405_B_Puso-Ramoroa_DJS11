@@ -15,7 +15,7 @@ export default function SearchBar() {
         .then(json => {
     // works and when console logged out it acurately returns results
             const results = json.filter((post) => {
-                return post && post.title && post.title.toLowerCase().includes(value);
+                return value && post && post.title && post.title.toLowerCase().includes(value);
             })
             console.log(results)
         })
@@ -38,3 +38,10 @@ export default function SearchBar() {
         </div>
     )
 }
+
+
+
+/* Reference:
+Make a Search Bar with React (with API Calls)
+https://www.youtube.com/watch?v=sWVgMcz8Q44
+*/
