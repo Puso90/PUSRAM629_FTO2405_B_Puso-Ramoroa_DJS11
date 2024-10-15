@@ -16,6 +16,8 @@ const Posts = () => {
         }
         const data = await response.json();
         setPosts(data);
+        // Log the fetched data from the API
+        console.log(data);
       } catch (error) {
         setError(error);
       } finally {
@@ -43,28 +45,32 @@ const Posts = () => {
   }
 
   return (
-    <div>
-      <h1 className='heading'>Podcast</h1>
-      <div className='carousel'>
-        <button className='arrow left' onClick={handlePrev}>&lt;</button>
-        
-        <ul className='list-container'>
-          {posts.map((post, index) => (
+    
+    <div className='podcast-container' style={{ marginTop: '20px' }}> {/* Add margin above */}
+      <ul className='list-container' style={{ display: 'flex', flexWrap: 'wrap', padding: 0 }}>
+        {posts
+          .sort((a, b) => {
+            if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+            if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+            return 0;
+          }) // Sort alphabetically by title
+          .map((post, index) => (
             <li 
-              className='list-style' 
+              className='sorted-list-style' 
               key={post.id} 
-              style={{display: index === currentIndex ? 'block' : 'none' }}
+              style={{ 
+                flex: '0 0 calc(12.5% - 10px)', // 8 columns with space
+                margin: '5px' // Margin between items
+              }}
             >
               <h2>{post.title}</h2>
-              <p>{post.body}</p>
               <img className='podcast-image' src={post.image} alt='podcast image' />
+              <p>Last Update: {post.updated}</p>
             </li>
           ))}
-        </ul>
-
-        <button className='arrow right' onClick={handleNext}>&gt;</button>
-      </div>
+      </ul>
     </div>
+    
   );
 };
 
