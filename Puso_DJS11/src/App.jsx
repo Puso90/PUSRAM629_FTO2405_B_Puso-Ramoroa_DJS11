@@ -1,5 +1,5 @@
 import React from "react";
-import BlogPosts from '../components/BlogPosts';
+import Podcasts from '../components/Podcast_page';
 
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
 
   return (
     <div>
-      <BlogPosts />
+      <Podcasts />
     </div>
   )
 }
