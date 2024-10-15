@@ -15,7 +15,12 @@ export default function SearchBar({ setResults }) {
         .then(json => {
     // works and when console logged out it acurately returns results
             const results = json.filter((post) => {
-                return value && post && post.title && post.title.toLowerCase().includes(value);
+                return (
+                    value && 
+                    post && 
+                    post.title && 
+                    post.title.toLowerCase()
+                    .includes(value));
             })
     // Leaving the log for demonstration purposes
     // Although it will also be self evident on UI, hopefully
