@@ -130,8 +130,26 @@ header {
   background-color: #ac0c0c;
   color: #ffffff;
   height: 74px;
-  display: flex;
-  flex-direction: row;
-  margin-top: auto;
+  margin: auto;
+  padding: 0.5em;
   font-weight: 500;
+  position: relative;
 }
+
+.nav-bar {
+  display: flex;
+  margin: 0.5em;
+}
+
+/* Search bar */
+.search-bar-container {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
+  width: 40%s;
+}
+
+
+
