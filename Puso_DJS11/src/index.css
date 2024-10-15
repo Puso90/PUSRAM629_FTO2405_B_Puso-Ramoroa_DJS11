@@ -73,10 +73,11 @@ button:focus-visible {
 CAOUSAL FOR PODCASTS DISPLAYED
 ___________________________________*/
 
-.carousel {
+.podcast-container {
   display: flex;
   align-items: center;
   position: relative;
+  
 }
 
 .arrow {
@@ -90,12 +91,14 @@ ___________________________________*/
   display: flex;
   flex-direction: row;
   transition: transform 0.5s ease;
+  
 }
 
 .list-style {
   list-style: none;
   text-align: center;
   width: 350px; /* Adjusted as needed */
+  margin: '5px'; /* Margin between items rendered, for some reason only works properly within the map function */
 }
 
 /* 

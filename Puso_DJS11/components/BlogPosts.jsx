@@ -5,7 +5,6 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -28,13 +27,7 @@ const Posts = () => {
     fetchPosts();
   }, []);
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % posts.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + posts.length) % posts.length);
-  };
+  
 
   if (loading) {
     return <div className='loading'>Loading...</div>;
@@ -56,10 +49,9 @@ const Posts = () => {
           }) // Sort alphabetically by title
           .map((post, index) => (
             <li 
-              className='sorted-list-style' 
+              className='list-style' 
               key={post.id} 
               style={{ 
-                flex: '0 0 calc(12.5% - 10px)', // 8 columns with space
                 margin: '5px' // Margin between items
               }}
             >
