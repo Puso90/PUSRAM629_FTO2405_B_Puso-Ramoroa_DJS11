@@ -6,6 +6,6 @@ footer {
     flex-shrink: 0;
     justify-content: center;
     align-items: center;
-    margin-top: auto;
-    font-weight: 500;
+    margin-top: auto; /* Push the footer to the bottom */
+    width: 100%;
   }

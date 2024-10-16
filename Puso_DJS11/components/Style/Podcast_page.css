@@ -1,0 +1,8 @@
+.list-style a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Use the current text color */
+  }
+  
+  .list-style a:hover {
+    color: inherit; /* Keep the same color on hover */
+  }
