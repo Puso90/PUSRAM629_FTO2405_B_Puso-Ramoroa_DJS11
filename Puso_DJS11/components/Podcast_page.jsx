@@ -57,7 +57,7 @@ const Posts = () => {
             >
               <h2>{post.title}</h2>
               <img className='podcast-image' src={post.image} alt='podcast image' />
-              <p>Last Update: {post.updated}</p>
+              <p className='last-update'>Last Update: {post.updated.slice(0, 10)}</p>
             </li>
           ))}
       </ul>
