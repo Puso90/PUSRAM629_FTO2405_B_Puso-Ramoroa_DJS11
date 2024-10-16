@@ -19,8 +19,8 @@ export default function SearchBar({ setResults }) {
                     value && 
                     post && 
                     post.title && 
-                    post.title.toLowerCase()
-                    .includes(value));
+                    post.title.toLowerCase().includes(value)
+                );
             })
     // Leaving the log for demonstration purposes
     // Although it will also be self evident on UI, hopefully
