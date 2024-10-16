@@ -1,16 +1,12 @@
 import React from "react";
-import Podcasts from '../components/Podcast_page';
-import Footer from "../components/footer";
-import Header from "../components/header";
+import Home from "./pages/Home";
 
 function App() {
   
 
   return (
     <div>
-      <Header />
-      <Podcasts />
-      <Footer />
+      <Home />
     </div>
   )
 }
