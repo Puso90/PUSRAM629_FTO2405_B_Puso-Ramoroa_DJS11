@@ -114,27 +114,7 @@ ___________________________________*/
 HEADER & FOOTER
 _____________________________*/
 
-footer {
-  background-color: #ac0c0c;
-  color: #ffffff;
-  height: 74px;
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center;
-  align-items: center;
-  margin-top: auto;
-  font-weight: 500;
-}
 
-header {
-  background-color: #ac0c0c;
-  color: #ffffff;
-  height: 74px;
-  margin: auto;
-  padding: 0.5em;
-  font-weight: 500;
-  position: relative;
-}
 
 .nav-bar {
   display: flex;

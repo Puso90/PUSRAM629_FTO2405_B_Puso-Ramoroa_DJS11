@@ -1,5 +1,5 @@
 import React from "react";
-import Podcasts from '/components/Podcast_page';
+import Podcasts from '../pages/Podcast_page';
 import Footer from "/components/footer";
 import Header from "/components/header";
 
