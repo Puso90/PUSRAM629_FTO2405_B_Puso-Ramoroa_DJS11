@@ -1,0 +1,37 @@
+.SortButtons {
+    display: flex;
+    justify-content: space-around; /* Space out buttons evenly */
+    padding: 10px; /* Add some padding around the buttons */
+    gap: 1em; /* Add a 1em gap between buttons */
+}
+
+.sortButton {
+    background-color: #ac0c0c; /* Button background */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding inside buttons */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.sortButton:hover {
+    background-color: darkred; /* Darker background on hover */
+}
+
+.dropDownButton {
+    position: relative; /* Needed for dropdown positioning if implemented */
+}
+
+/* Optional: Style for dropdown if you plan to implement it */
+.dropDownButton:hover .dropdownContent {
+    display: block; /* Show dropdown on hover */
+}
+
+.dropdownContent {
+    display: none; /* Hide by default */
+    position: absolute; /* Positioning */
+    background-color: white; /* Dropdown background */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Shadow for dropdown */
+    z-index: 1; /* Stack on top */
+}
