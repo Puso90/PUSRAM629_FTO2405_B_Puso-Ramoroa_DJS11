@@ -10,3 +10,12 @@ header {
     right: 0;
     z-index: 1;
   }
+
+  .div-app-name a {
+    text-decoration: none; /* Remove underline from link */
+    color: inherit; /* Keep the text color consistent with surrounding text */
+}
+
+  .div-app-name a:hover {
+    color: whitesmoke; /* Optional: Change color on hover */
+}
