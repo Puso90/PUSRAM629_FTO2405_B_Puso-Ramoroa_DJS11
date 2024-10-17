@@ -69,48 +69,6 @@ button:focus-visible {
   }
 }
 
-/*_________________________________
-CAOUSAL FOR PODCASTS DISPLAYED
-___________________________________*/
-
-.podcast-container {
-  display: flex;
-  align-items: center;
-  position: relative;
-  flex-direction: column;
-  
-}
-
-.arrow {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-.list-container {
-  display: flex;
-  flex-direction: row;
-  transition: transform 0.5s ease;
-  
-}
-
-.list-style {
-  list-style: none;
-  text-align: center;
-  width: 350px; /* Adjusted as needed */
-  margin: '5px'; /* Margin between items rendered, for some reason only works properly within the map function */
-}
-
-/* 
-- Instead of adding size on BlogPost.jsx
-- This seems cleaner and better maintainable 
-*/
-.podcast-image {
-  width: 300px;
-  height: 300px;
-}
-
 /*_____________________________
 HEADER & FOOTER
 _____________________________*/
