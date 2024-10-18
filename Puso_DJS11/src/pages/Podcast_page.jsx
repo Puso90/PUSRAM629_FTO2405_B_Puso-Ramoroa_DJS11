@@ -3,22 +3,23 @@ import { Link } from 'react-router-dom'; // Import Link for routing
 import "/src/index.css";
 import "/components/Style/Podcast_page.css";
 import SortButtons from '../../components/SortButtons';
-import "/components/Style/SortButtons.css"
+import "/components/Style/SortButtons.css";
 
-const podcasts = () => {
-  const [podcasts, setpodcasts] = useState([]);
+const Podcasts = () => {
+  const [podcasts, setPodcasts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sortOrder, setSortOrder] = useState('All'); // State to track the current sorting order
 
   useEffect(() => {
-    const fetchpodcasts = async () => {
+    const fetchPodcasts = async () => {
       try {
         const response = await fetch('https://podcast-api.netlify.app');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setpodcasts(data); // Set the fetched podcasts in state
+        setPodcasts(data); // Set the fetched podcasts in state
         console.log(data); // Log the fetched data for debugging
       } catch (error) {
         setError(error); // Set error state if fetch fails
@@ -27,8 +28,22 @@ const podcasts = () => {
       }
     };
 
-    fetchpodcasts(); // Call the fetch function
+    fetchPodcasts(); // Call the fetch function
   }, []);
+
+  const handleSort = (order) => {
+    setSortOrder(order);
+  };
+
+  // Sort podcasts based on the current sort order
+  const sortedPodcasts = () => {
+    if (sortOrder === 'A-Z') {
+      return [...podcasts].sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortOrder === 'Z-A') {
+      return [...podcasts].sort((a, b) => b.title.localeCompare(a.title));
+    }
+    return podcasts; // Return unsorted podcasts for 'All'
+  };
 
   // Show loading state while fetching data
   if (loading) {
@@ -41,36 +56,27 @@ const podcasts = () => {
   }
 
   return (
-    
-      <div className='podcast-container' style={{ marginTop: '100px' }}>
-        <SortButtons />
-        <ul className='list-container' style={{ display: 'flex', flexWrap: 'wrap', padding: 0 }}>
-          {podcasts
-            .sort((a, b) => {
-              // Sort podcasts alphabetically by title
-              if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
-              if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
-              return 0;
-            })
-            .map((post) => (
-              <li
-                className='list-style'
-                key={post.id}
-                style={{ margin: '5px' }} // Margin between list items
-              >
-                
-                {/* Link to the PodcastDetail page with the post ID */}
-                <Link to={`/podcast/${post.id}`}>
-                  <h2>{post.title}</h2> {/* Podcast title */}
-                  <img className='podcast-image' src={post.image} alt='podcast image' /> {/* Podcast image */}
-                  <p className='last-update'>Last Update: {post.updated.slice(0, 10)}</p> {/* Last update date */}
-                </Link>
-              </li>
-            ))}
-        </ul>
-      </div>
-    
+    <div className='podcast-container' style={{ marginTop: '100px' }}>
+      <SortButtons onSort={handleSort} />
+      <ul className='list-container' style={{ display: 'flex', flexWrap: 'wrap', padding: 0 }}>
+        {sortedPodcasts().map((post) => (
+          <li
+            className='list-style'
+            key={post.id}
+            style={{ margin: '5px' }} // Margin between list items
+          >
+            {/* Link to the PodcastDetail page with the post ID */}
+            <Link to={`/podcast/${post.id}`}>
+              <h2>{post.title}</h2> {/* Podcast title */}
+              <img className='podcast-image' src={post.image} alt='podcast image' /> {/* Podcast image */}
+              <p className='last-update'>Last Update: {post.updated.slice(0, 10)}</p> {/* Last update date */}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
-export default podcasts;
+export default Podcasts;
+
