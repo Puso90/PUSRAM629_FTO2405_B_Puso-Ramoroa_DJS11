@@ -1,9 +1,10 @@
 .podcast-container {
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: center; /* Center items horizontally */
   flex-direction: column;
-  
+  position: relative;
+  padding: 20px; /* Optional: Add some padding for better spacing */
 }
 
 .arrow {
@@ -16,31 +17,31 @@
 .list-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap; /* Allow wrapping to next line */
+  justify-content: center; /* Center items within the container */
   transition: transform 0.5s ease;
-  
 }
 
 .list-style {
   list-style: none;
   text-align: center;
   width: 350px; /* Adjusted as needed */
-  margin: '5px'; /* Margin between items rendered, for some reason only works properly within the map function */
+  margin: 5px; /* Removed quotes for proper CSS syntax */
+  border: 2px solid grey;
+  border-radius: 8px; /* Optional: Add some border radius for a smoother look */
+  padding: 10px; /* Optional: Add padding for better spacing */
 }
 
-/* 
-- Instead of adding size on BlogPost.jsx
-- This seems cleaner and better maintainable 
-*/
 .podcast-image {
   width: 300px;
   height: 300px;
 }
 
 .list-style a {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Use the current text color */
-  }
-  
-  .list-style a:hover {
-    color: inherit; /* Keep the same color on hover */
-  }
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Use the current text color */
+}
+
+.list-style a:hover {
+  color: inherit; /* Keep the same color on hover */
+}
