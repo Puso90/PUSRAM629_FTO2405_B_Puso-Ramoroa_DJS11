@@ -4,6 +4,7 @@ import "/src/index.css";
 import "/components/Style/Podcast_page.css";
 import SortButtons from '../../components/SortButtons';
 import "/components/Style/SortButtons.css";
+import { FaHeart } from 'react-icons/fa';
 
 const Podcasts = () => {
   const [podcasts, setPodcasts] = useState([]);
@@ -12,7 +13,15 @@ const Podcasts = () => {
   const [error, setError] = useState(null);
   const [sortOrder, setSortOrder] = useState('All');
   const [selectedGenre, setSelectedGenre] = useState(null);
+  const [favorites, setFavorites] = useState([]);
 
+  // Retrieve favorites from localStorage on initial load
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorites(storedFavorites);
+  }, []);
+
+  // Fetch data from API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,6 +54,18 @@ const Podcasts = () => {
     fetchData();
   }, []);
 
+  // Toggle favorite podcast
+  const toggleFavorite = (podcastId) => {
+    let updatedFavorites = [];
+    if (favorites.includes(podcastId)) {
+      updatedFavorites = favorites.filter(id => id !== podcastId); // Remove from favorites
+    } else {
+      updatedFavorites = [...favorites, podcastId]; // Add to favorites
+    }
+    setFavorites(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites)); // Update localStorage
+  };
+
   const handleSort = (order) => {
     if (order === 'All') {
       setSelectedGenre(null); // Reset genre when "All Podcasts" is clicked
@@ -65,6 +86,8 @@ const Podcasts = () => {
       return [...filteredPodcasts].sort((a, b) => a.title.localeCompare(b.title));
     } else if (sortOrder === 'Z-A') {
       return [...filteredPodcasts].sort((a, b) => b.title.localeCompare(a.title));
+    } else if (sortOrder === 'Favorites') {
+      return filteredPodcasts.filter(podcast => favorites.includes(podcast.id)); // Filter by favorites
     }
     return filteredPodcasts;
   };
@@ -101,9 +124,18 @@ const Podcasts = () => {
             <Link to={`/podcast/${post.id}`}>
               <h2>{post.title}</h2>
               <img className='podcast-image' src={post.image} alt='podcast image' />
-              <p className='last-update'>Last Update: {post.updated.slice(0, 10)}</p>
-              <p>Genres: {post.genres.map(id => genres[id]?.title).join(', ')}</p>
             </Link>
+
+            <div className='podcast-captions'>
+              <div className='last-update'>Last Update: {post.updated.slice(0, 10)}</div>
+              <div>Genres: {post.genres.map(id => genres[id]?.title).join(', ')}</div>
+              <div>Seasons: {post.seasons}</div>
+            </div>  
+
+            <div className='podcast-likes' onClick={() => toggleFavorite(post.id)}>
+              <FaHeart style={{ color: favorites.includes(post.id) ? 'yellow' : 'grey' }} />
+            </div>
+            
           </li>
         ))}
       </ul>
