@@ -17,11 +17,6 @@ export default function SortButtons({ onSort }) {
                 Sort: Z-A
             </button>
 
-            <button className='sortButton genre dropDownButton'>
-                Sort by genre
-                {/* Optionally add dropdown here */}
-            </button>
-
             <button className='sortButton favourites'>
                 <FaHeart />
             </button>
