@@ -23,16 +23,12 @@ const Podcasts = () => {
         const podcastsData = await podcastsResponse.json();
         setPodcasts(podcastsData);
 
-        // Get unique genre IDs from all podcasts
         const uniqueGenreIds = [...new Set(podcastsData.flatMap(podcast => podcast.genres))];
 
-        // Fetch genre data for each unique genre ID
         const genrePromises = uniqueGenreIds.map(id => 
           fetch(`https://podcast-api.netlify.app/genre/${id}`).then(res => res.json())
         );
         const genresData = await Promise.all(genrePromises);
-
-        // Create a genres object with id as key and genre data as value
         const genresObject = genresData.reduce((acc, genre) => {
           acc[genre.id] = genre;
           return acc;
@@ -50,6 +46,9 @@ const Podcasts = () => {
   }, []);
 
   const handleSort = (order) => {
+    if (order === 'All') {
+      setSelectedGenre(null); // Reset genre when "All Podcasts" is clicked
+    }
     setSortOrder(order);
   };
 
@@ -113,4 +112,3 @@ const Podcasts = () => {
 };
 
 export default Podcasts;
-
