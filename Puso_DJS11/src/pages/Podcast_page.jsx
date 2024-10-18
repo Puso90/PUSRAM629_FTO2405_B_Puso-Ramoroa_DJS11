@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for routing
+import { Link } from 'react-router-dom';
 import "/src/index.css";
 import "/components/Style/Podcast_page.css";
 import SortButtons from '../../components/SortButtons';
@@ -7,50 +7,73 @@ import "/components/Style/SortButtons.css";
 
 const Podcasts = () => {
   const [podcasts, setPodcasts] = useState([]);
+  const [genres, setGenres] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [sortOrder, setSortOrder] = useState('All'); // State to track the current sorting order
+  const [sortOrder, setSortOrder] = useState('All');
+  const [selectedGenre, setSelectedGenre] = useState(null);
 
   useEffect(() => {
-    const fetchPodcasts = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('https://podcast-api.netlify.app');
-        if (!response.ok) {
+        const podcastsResponse = await fetch('https://podcast-api.netlify.app');
+        if (!podcastsResponse.ok) {
           throw new Error('Network response was not ok');
         }
-        const data = await response.json();
-        setPodcasts(data); // Set the fetched podcasts in state
-        console.log(data); // Log the fetched data for debugging
+        const podcastsData = await podcastsResponse.json();
+        setPodcasts(podcastsData);
+
+        // Get unique genre IDs from all podcasts
+        const uniqueGenreIds = [...new Set(podcastsData.flatMap(podcast => podcast.genres))];
+
+        // Fetch genre data for each unique genre ID
+        const genrePromises = uniqueGenreIds.map(id => 
+          fetch(`https://podcast-api.netlify.app/genre/${id}`).then(res => res.json())
+        );
+        const genresData = await Promise.all(genrePromises);
+
+        // Create a genres object with id as key and genre data as value
+        const genresObject = genresData.reduce((acc, genre) => {
+          acc[genre.id] = genre;
+          return acc;
+        }, {});
+
+        setGenres(genresObject);
       } catch (error) {
-        setError(error); // Set error state if fetch fails
+        setError(error);
       } finally {
-        setLoading(false); // Set loading to false after fetch attempt
+        setLoading(false);
       }
     };
 
-    fetchPodcasts(); // Call the fetch function
+    fetchData();
   }, []);
 
   const handleSort = (order) => {
     setSortOrder(order);
   };
 
-  // Sort podcasts based on the current sort order
-  const sortedPodcasts = () => {
-    if (sortOrder === 'A-Z') {
-      return [...podcasts].sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortOrder === 'Z-A') {
-      return [...podcasts].sort((a, b) => b.title.localeCompare(a.title));
-    }
-    return podcasts; // Return unsorted podcasts for 'All'
+  const handleGenreFilter = (genreId) => {
+    setSelectedGenre(genreId === selectedGenre ? null : genreId);
   };
 
-  // Show loading state while fetching data
+  const sortedAndFilteredPodcasts = () => {
+    let filteredPodcasts = selectedGenre
+      ? podcasts.filter(podcast => podcast.genres.includes(selectedGenre))
+      : podcasts;
+
+    if (sortOrder === 'A-Z') {
+      return [...filteredPodcasts].sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortOrder === 'Z-A') {
+      return [...filteredPodcasts].sort((a, b) => b.title.localeCompare(a.title));
+    }
+    return filteredPodcasts;
+  };
+
   if (loading) {
     return <div className='loading'>Loading...</div>;
   }
 
-  // Show error message if there was a problem fetching data
   if (error) {
     return <div>Error: {error.message}</div>;
   }
@@ -58,18 +81,29 @@ const Podcasts = () => {
   return (
     <div className='podcast-container' style={{ marginTop: '100px' }}>
       <SortButtons onSort={handleSort} />
+      <div className="genre-buttons">
+        {Object.values(genres).map(genre => (
+          <button
+            key={genre.id}
+            onClick={() => handleGenreFilter(genre.id)}
+            className={selectedGenre === genre.id ? 'active' : ''}
+          >
+            {genre.title}
+          </button>
+        ))}
+      </div>
       <ul className='list-container' style={{ display: 'flex', flexWrap: 'wrap', padding: 0 }}>
-        {sortedPodcasts().map((post) => (
+        {sortedAndFilteredPodcasts().map((post) => (
           <li
             className='list-style'
             key={post.id}
-            style={{ margin: '5px' }} // Margin between list items
+            style={{ margin: '5px' }}
           >
-            {/* Link to the PodcastDetail page with the post ID */}
             <Link to={`/podcast/${post.id}`}>
-              <h2>{post.title}</h2> {/* Podcast title */}
-              <img className='podcast-image' src={post.image} alt='podcast image' /> {/* Podcast image */}
-              <p className='last-update'>Last Update: {post.updated.slice(0, 10)}</p> {/* Last update date */}
+              <h2>{post.title}</h2>
+              <img className='podcast-image' src={post.image} alt='podcast image' />
+              <p className='last-update'>Last Update: {post.updated.slice(0, 10)}</p>
+              <p>Genres: {post.genres.map(id => genres[id]?.title).join(', ')}</p>
             </Link>
           </li>
         ))}
