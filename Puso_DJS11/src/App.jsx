@@ -1,6 +1,8 @@
 import React from "react";
 import Home from "./pages/Home";
 import PodcastDetail from "./pages/Podcast_detail";
+import Favourites from '/components/Favourites_page';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
