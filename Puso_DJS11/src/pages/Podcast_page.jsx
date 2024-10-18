@@ -5,20 +5,20 @@ import "/components/Style/Podcast_page.css";
 import SortButtons from '../../components/SortButtons';
 import "/components/Style/SortButtons.css"
 
-const Posts = () => {
-  const [posts, setPosts] = useState([]);
+const podcasts = () => {
+  const [podcasts, setpodcasts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchpodcasts = async () => {
       try {
         const response = await fetch('https://podcast-api.netlify.app');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setPosts(data); // Set the fetched posts in state
+        setpodcasts(data); // Set the fetched podcasts in state
         console.log(data); // Log the fetched data for debugging
       } catch (error) {
         setError(error); // Set error state if fetch fails
@@ -27,7 +27,7 @@ const Posts = () => {
       }
     };
 
-    fetchPosts(); // Call the fetch function
+    fetchpodcasts(); // Call the fetch function
   }, []);
 
   // Show loading state while fetching data
@@ -45,9 +45,9 @@ const Posts = () => {
       <div className='podcast-container' style={{ marginTop: '100px' }}>
         <SortButtons />
         <ul className='list-container' style={{ display: 'flex', flexWrap: 'wrap', padding: 0 }}>
-          {posts
+          {podcasts
             .sort((a, b) => {
-              // Sort posts alphabetically by title
+              // Sort podcasts alphabetically by title
               if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
               if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
               return 0;
@@ -73,4 +73,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default podcasts;
