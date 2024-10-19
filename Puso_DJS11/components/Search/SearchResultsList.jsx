@@ -17,4 +17,4 @@ export const SearchResultsList = ({results}) => {
             }
         </div>
     )
-}
+} 

@@ -5,6 +5,7 @@ import "/components/Style/Podcast_page.css";
 import SortButtons from '../../components/SortButtons';
 import "/components/Style/SortButtons.css";
 import { FaHeart } from 'react-icons/fa';
+import Favourites from '../../components/Favourites_page';
 
 const Podcasts = () => {
   const [podcasts, setPodcasts] = useState([]);
@@ -42,8 +43,13 @@ const Podcasts = () => {
           acc[genre.id] = genre;
           return acc;
         }, {});
+        //console.log(genresObject)
 
+        //set genreObj to local storage
+        
+        localStorage.setItem('genres', JSON.stringify(genresObject))
         setGenres(genresObject);
+        
       } catch (error) {
         setError(error);
       } finally {
@@ -55,17 +61,18 @@ const Podcasts = () => {
   }, []);
 
   // Toggle favorite podcast
-  const toggleFavorite = (podcastId) => {
+  const toggleFavorite = (podcast) => {
     let updatedFavorites = [];
-    if (favorites.includes(podcastId)) {
-      updatedFavorites = favorites.filter(id => id !== podcastId); // Remove from favorites
+    if (favorites.includes(podcast)) {
+      updatedFavorites = favorites.filter(show => show !== podcast); // Remove from favorites
     } else {
-      updatedFavorites = [...favorites, podcastId]; // Add to favorites
+      updatedFavorites = [...favorites, podcast]; // Add to favorites
     }
     setFavorites(updatedFavorites);
     localStorage.setItem('favorites', JSON.stringify(updatedFavorites)); // Update localStorage
+    console.log(favorites)
   };
-
+  
   const handleSort = (order) => {
     if (order === 'All') {
       setSelectedGenre(null); // Reset genre when "All Podcasts" is clicked
@@ -100,6 +107,8 @@ const Podcasts = () => {
     return <div>Error: {error.message}</div>;
   }
 
+  
+
   return (
     <div className='podcast-container' style={{ marginTop: '100px' }}>
       <SortButtons onSort={handleSort} />
@@ -132,8 +141,8 @@ const Podcasts = () => {
               <div>Seasons: {post.seasons}</div>
             </div>  
 
-            <div className='podcast-likes' onClick={() => toggleFavorite(post.id)}>
-              <FaHeart style={{ color: favorites.includes(post.id) ? 'yellow' : 'grey' }} />
+            <div className='podcast-likes' onClick={() => toggleFavorite(post)}>
+              <FaHeart style={{ color: favorites.some(showLike => showLike.id === post.id) ? 'yellow' : 'grey' }} />
             </div>
             
           </li>

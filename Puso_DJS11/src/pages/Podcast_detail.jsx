@@ -28,7 +28,7 @@ const PodcastDetail = () => {
             setLoading(false); // Set loading to false after fetch attempt
           }
         };
-        
+        console.log(fetchPodcast())
         fetchPodcast(); // Call the fetch function
       }, [id]); // Dependency array includes id to refetch when it changes
 
