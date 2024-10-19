@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./src/components/SortButtons.jsx";
+import "./Style/SortButtons.css";
 import { FaHeart } from "react-icons/fa";
 
 export default function SortButtons({ onSort, onFavoritesClick, isFavoritesActive }) {

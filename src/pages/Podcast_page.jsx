@@ -5,7 +5,7 @@ import "../components/Style/Podcast_page.css";
 import SortButtons from "../components/SortButtons";
 import "../components/Style/SortButtons.css";
 import { FaHeart } from 'react-icons/fa';
-import Favourites from '../../components/Favourites_page';
+
 
 const Podcasts = () => {
   const [podcasts, setPodcasts] = useState([]);

@@ -1,5 +1,5 @@
 import React from "react";
-import Podcasts from "/Podcast_page";
+import Podcasts from "./Podcast_page";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import SortButtons from "../components/SortButtons";
