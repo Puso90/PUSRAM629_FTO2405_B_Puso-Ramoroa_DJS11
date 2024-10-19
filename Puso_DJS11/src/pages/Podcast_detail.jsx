@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Import useParams to get the ID from the URL
 import Header from "/components/header";
 import Footer from "/components/footer";
+import PodcastShows from "/components/PodcastShows";
+import Slider from 'react-slick';
+import Audio from '/components/Audio';
 
 const PodcastDetail = () => {
     const { id } = useParams(); // Get the podcast ID from the URL parameters
-    const [podcasts, setpodcasts] = useState({}); // Initialize state for a single post
+    const [podcast, setPodcast] = useState({}); // Initialize state for the podcast details
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchpodcasts = async () => {
+        const fetchPodcast = async () => {
           try {
             // Fetch the podcast details using the ID
             const response = await fetch(`https://podcast-api.netlify.app/id/${id}`);
@@ -18,8 +21,7 @@ const PodcastDetail = () => {
               throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            setpodcasts(data); // Set the fetched podcast data in state
-            console.log(data); // Log the fetched data for debugging
+            setPodcast(data); // Set the fetched podcast data in state
           } catch (error) {
             setError(error); // Set error state if fetch fails
           } finally {
@@ -27,7 +29,7 @@ const PodcastDetail = () => {
           }
         };
         
-        fetchpodcasts(); // Call the fetch function
+        fetchPodcast(); // Call the fetch function
       }, [id]); // Dependency array includes id to refetch when it changes
 
     // Show loading state while fetching data
@@ -44,13 +46,10 @@ const PodcastDetail = () => {
         <>
             <Header /> {/* Render header */}
             <div>
-                <h1>{podcasts.title}</h1> {/* Display podcast title */}
-                <img src={podcasts.image} style={{ width: '300px', height: '300px' }} alt='Podcast' /> {/* Display podcast image */}
-                <p>{podcasts.description}</p> {/* Display podcast description */}
-                <audio controls>
-                    <source src={podcasts.audioUrl} type="audio/mpeg" /> {/* Audio source */}
-                    Your browser does not support the audio element.
-                </audio>
+                <h1>{podcast.title}</h1> {/* Display podcast title */}
+                <img src={podcast.image} style={{ width: '300px', height: '300px' }} alt='Podcast' /> {/* Display podcast image */}
+                <p>{podcast.description}</p> {/* Display podcast description */}
+                <PodcastShows id={id} /> {/* Pass podcast ID to PodcastShows component */}
             </div>
             <Footer /> {/* Render footer */}
         </>
@@ -58,3 +57,4 @@ const PodcastDetail = () => {
 }; 
 
 export default PodcastDetail;
+
