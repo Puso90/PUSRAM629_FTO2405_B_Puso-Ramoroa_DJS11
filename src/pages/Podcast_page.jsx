@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import "/src/index.css";
-import "/components/Style/Podcast_page.css";
-import SortButtons from '../../components/SortButtons';
-import "/components/Style/SortButtons.css";
+import "../components/Style/Podcast_page.css";
+import SortButtons from "../components/SortButtons";
+import "../components/Style/SortButtons.css";
 import { FaHeart } from 'react-icons/fa';
 import Favourites from '../../components/Favourites_page';
 

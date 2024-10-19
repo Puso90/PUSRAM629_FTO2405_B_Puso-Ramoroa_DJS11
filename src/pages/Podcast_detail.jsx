@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Import useParams to get the ID from the URL
-import Header from "/components/header";
-import Footer from "/components/footer";
-import PodcastShows from "/components/PodcastShows";
+import Header from "../components/header";
+import Footer from "../components/footer";
+import PodcastShows from "../components/PodcastShows";
 import Slider from 'react-slick';
-import Audio from '/components/Audio';
+import Audio from '../components/Audio';
 
 const PodcastDetail = () => {
     const { id } = useParams(); // Get the podcast ID from the URL parameters

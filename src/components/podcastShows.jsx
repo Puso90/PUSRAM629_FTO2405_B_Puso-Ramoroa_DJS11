@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import Audio from '/components/Audio'; // Import your Audio component
-import '/components/Style/podcastShowsStyle.css';
+import Audio from '../components/Audio'; // Import your Audio component
+import '../components/Style/podcastShowsStyle.css';
 
 // Import Slick CSS
 import 'slick-carousel/slick/slick.css';

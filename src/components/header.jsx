@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SearchBar from "/components/Search/searchbar.jsx"; 
+import SearchBar from "../components/Search/searchbar.jsx"; 
 import { SearchResultsList } from "./Search/SearchResultsList";
 import "./Style/header.css";
 import { Link } from "react-router-dom";
