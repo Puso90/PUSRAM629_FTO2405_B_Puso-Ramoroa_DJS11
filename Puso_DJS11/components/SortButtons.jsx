@@ -18,8 +18,8 @@ export default function SortButtons({ onSort, onFavoritesClick, isFavoritesActiv
             </button>
 
             <button onClick={() => onSort('Favorites')}>
-        <FaHeart /> Favorites
-      </button>
+                <FaHeart /> Favorites
+            </button>
         </div>
     );
 }
