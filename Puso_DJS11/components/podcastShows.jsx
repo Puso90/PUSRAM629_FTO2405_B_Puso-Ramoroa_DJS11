@@ -52,7 +52,7 @@ const PodcastShows = ({ id }) => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,  // Show 3 episodes at a time
+        slidesToShow: 3,
         slidesToScroll: 1,
         adaptiveHeight: true,
         responsive: [
@@ -88,6 +88,12 @@ const PodcastShows = ({ id }) => {
 
     const selectedSeasonData = podcastShows.seasons.find(season => season.id === selectedSeason);
 
+    // Function to truncate description
+    const truncateDescription = (description, maxLength) => {
+        if (!description) return '';
+        return description.length > maxLength ? `${description.slice(0, maxLength)}...` : description;
+    };
+
     return (
         <div className="podcast-show-container">
             <div className="season-selector">
@@ -104,14 +110,18 @@ const PodcastShows = ({ id }) => {
                 <div className="season-container">
                     <h2 className="season-heading">Season {podcastShows.seasons.indexOf(selectedSeasonData) + 1}</h2>
                     <Slider {...settings}>
-                        {selectedSeasonData.episodes.map((episode) => (
-                            <div className="episode-block" key={episode.id}>
-                                <h5 className="episode-title">{episode.title}</h5>
-                                <img className="episode-image" src={podcastShows.image} alt="Season" />
-                                <p className="episode-description">{episode.description}</p>
-                                <Audio audioUrl={episode.audioUrl} /> {/* Audio component */}
-                            </div>
-                        ))}
+                        {selectedSeasonData.episodes.map((episode) => {
+                            const audioUrl = episode.audioUrl || "https://podcast-api.netlify.app/placeholder-audio.mp3"; // Use placeholder if audioUrl is missing
+                            console.log(audioUrl);  // Log the audio URL here
+                            return (
+                                <div className="episode-block" key={episode.id}>
+                                    <h5 className="episode-title">{episode.title}</h5>
+                                    <img className="episode-image" src={podcastShows.image} alt="Season" />
+                                    <p className="episode-description">{truncateDescription(episode.description, 100)}</p> {/* Truncate to 100 characters */}
+                                    <Audio audioUrl={audioUrl} /> {/* Pass the audio URL to Audio component */}
+                                </div>
+                            );
+                        })}
                     </Slider>
                 </div>
             )}
@@ -120,6 +130,7 @@ const PodcastShows = ({ id }) => {
 };
 
 export default PodcastShows;
+
 
 
 
