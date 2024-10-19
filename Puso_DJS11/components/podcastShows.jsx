@@ -118,7 +118,7 @@ const PodcastShows = ({ id }) => {
                                     <h5 className="episode-title">{episode.title}</h5>
                                     <img className="episode-image" src={podcastShows.image} alt="Season" />
                                     <p className="episode-description">{truncateDescription(episode.description, 100)}</p> {/* Truncate to 100 characters */}
-                                    <Audio audioUrl={audioUrl} /> {/* Pass the audio URL to Audio component */}
+                                    <Audio audioUrl={audioUrl} /> {/* Pass the audio URL to Audio component */} 
                                 </div>
                             );
                         })}
