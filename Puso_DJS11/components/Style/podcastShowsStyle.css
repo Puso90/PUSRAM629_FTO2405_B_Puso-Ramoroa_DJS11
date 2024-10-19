@@ -55,6 +55,13 @@
   margin: 0 auto;
 }
 
+@media (max-width: 1000px) {
+  .slick-slider {
+    max-width: 550px;
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 768px) {
   .episode-block {
     max-width: 200px; /* Reduce the width on smaller screens */
