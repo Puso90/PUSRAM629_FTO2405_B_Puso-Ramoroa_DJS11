@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import Audio from '/components/Audio';
+import Audio from '/components/Audio'; // Import your Audio component
 import '/components/Style/podcastShowsStyle.css';
 
 // Import Slick CSS
@@ -57,7 +57,7 @@ const PodcastShows = ({ id }) => {
         adaptiveHeight: true,
         responsive: [
             {
-                breakpoint: 1024, // For large screens
+                breakpoint: 1024,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
@@ -65,7 +65,7 @@ const PodcastShows = ({ id }) => {
                 }
             },
             {
-                breakpoint: 768, // For tablets
+                breakpoint: 768,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
@@ -73,7 +73,7 @@ const PodcastShows = ({ id }) => {
                 }
             },
             {
-                breakpoint: 480, // For mobile
+                breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
@@ -109,7 +109,7 @@ const PodcastShows = ({ id }) => {
                                 <h5 className="episode-title">{episode.title}</h5>
                                 <img className="episode-image" src={podcastShows.image} alt="Season" />
                                 <p className="episode-description">{episode.description}</p>
-                                <Audio audioUrl={episode.audioUrl} />
+                                <Audio audioUrl={episode.audioUrl} /> {/* Audio component */}
                             </div>
                         ))}
                     </Slider>
