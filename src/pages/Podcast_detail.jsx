@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Import useParams to get the ID from the URL
 import Header from "../components/header";
 import Footer from "../components/footer";
-import PodcastShows from "/src/components/podcastShows.jsx";
+import PodcastShows from "../components/PodcastShows";
 import Slider from 'react-slick';
 import Audio from '../components/Audio';
 
