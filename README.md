@@ -1,6 +1,6 @@
 # 🎵 PODCAST APP | PORTFOLIO PIECE 💿
 [DJS11] Starter Instructions for the Final Portfolio Piece Submission 🚀
-
+Link to Puso's Podcast Machine [https://pusopodcast.netlify.app]
 
 <!-- omit in toc -->
 **Table of Contents**
