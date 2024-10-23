@@ -4,6 +4,7 @@ import PodcastDetail from "./pages/Podcast_detail";
 import Favourites from "./components/Favourites_page";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PodcastList from "./pages/PodcastList";
 
 function App() {
   
@@ -12,6 +13,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/podcast-list" element={<PodcastList />} />
         <Route path="/podcast/:id" element={<PodcastDetail />} />
         <Route path="/favourites" element={<Favourites />} />
         

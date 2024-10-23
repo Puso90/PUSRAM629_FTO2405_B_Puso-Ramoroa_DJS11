@@ -32,6 +32,12 @@ export default function Header() {
                         </Link>
                     </div>
 
+                    <div>
+                        <Link to={'/podcast-list'}>
+                            Podcasts
+                        </Link>
+                    </div>
+
                     <div className="shows-button podcast-detail">
                         <Link to={'/podcast/:id'}>
                             Shows
