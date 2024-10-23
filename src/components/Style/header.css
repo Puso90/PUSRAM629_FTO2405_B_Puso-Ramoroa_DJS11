@@ -1,21 +1,73 @@
 header {
-    background-color: #ac0c0c;
-    color: #ffffff;
-    height: 74px;
-    padding: 0.5em;
-    font-weight: 500;
-    position: fixed; /* or sticky if you want it to scroll with the page */
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-  }
-
-  .div-app-name a {
-    text-decoration: none; /* Remove underline from link */
-    color: inherit; /* Keep the text color consistent with surrounding text */
+  background-color: #ac0c0c;
+  color: #ffffff;
+  height: 74px;
+  padding: 0.5em;
+  font-weight: 500;
+  position: fixed; /* or sticky if you want it to scroll with the page */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 
-  .div-app-name a:hover {
-    color: whitesmoke; /* Optional: Change color on hover */
+.nav-bar {
+  display: flex;
+  justify-content: space-between; /* Evenly space items */
+  align-items: center; /* Center items vertically */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.div-app-name h3 {
+  margin: 0; /* Remove default margin */
+  color: white; /* App name color */
+}
+
+.search-bar-container {
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+.page-buttons-container {
+  display: flex;
+  gap: 1em; /* Space between buttons */
+}
+
+.page-buttons-container a {
+  color: white; /* Button text color */
+  text-decoration: none; /* Remove underline */
+  padding: 0.5em 1em; /* Add padding to buttons */
+  border-radius: 4px; /* Optional: round the corners */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.page-buttons-container a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Change background on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .nav-bar {
+      flex-direction: column; /* Stack items vertically on smaller screens */
+      align-items: center; /* Center items */
+  }
+
+  header {
+      height: 150px; /* Adjust header height if necessary */
+  }
+
+  .page-buttons-container {
+      width: auto; /* Allow buttons container to size based on content */
+      justify-content: center; /* Center buttons */
+      margin-top: 0.5em; /* Add margin on top */
+      display: flex; /* Ensure it uses flexbox for alignment */
+      gap: 1em; /* Maintain spacing between buttons */
+  }
+
+  .search-bar-container {
+      width: auto; /* Allow search bar container to size based on content */
+      margin-top: 0.5em; /* Add margin on top */
+      display: flex; /* Ensure it uses flexbox */
+      justify-content: center; /* Center search bar */
+  }
 }
