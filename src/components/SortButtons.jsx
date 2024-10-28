@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./Style/SortButtons.css";
 import { FaHeart } from "react-icons/fa";
 
-export default function SortButtons({ onSort, onFavoritesClick, isFavoritesActive }) {
+export default function SortButtons({ onSort, dateSortOrder }) {
     return (
         <div className="SortButtons"> 
             <button className='sortButton allPodcasts' onClick={() => onSort('All')}>
@@ -17,10 +17,15 @@ export default function SortButtons({ onSort, onFavoritesClick, isFavoritesActiv
                 Sort: Z-A
             </button>
 
+            <button className='sortButton oldest-Latest' onClick={() => onSort('Oldest/Latest')}>
+                Sort: {dateSortOrder === 'latest' ? 'Oldest' : 'Latest'}
+            </button>
+
             <button onClick={() => onSort('Favorites')}>
                 <FaHeart /> Favorites
             </button>
         </div>
     );
 }
+
 
