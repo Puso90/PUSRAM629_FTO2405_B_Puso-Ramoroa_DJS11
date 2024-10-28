@@ -5,6 +5,7 @@ import Favourites from "./components/Favourites_page";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PodcastList from "./pages/PodcastList";
+import FavouritesPage from "./pages/FavouritesPage";
 
 function App() {
   
@@ -15,7 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/podcast-list" element={<PodcastList />} />
         <Route path="/podcast/:id" element={<PodcastDetail />} />
-        <Route path="/favourites" element={<Favourites />} />
+        <Route path="/favourites" element={<FavouritesPage />} />
         
       </Routes>
     </Router>
