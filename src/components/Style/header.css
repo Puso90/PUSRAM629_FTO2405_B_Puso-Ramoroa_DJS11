@@ -42,7 +42,7 @@ header {
 }
 
 .page-buttons-container a:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Change background on hover */
+  background-color: yellow; /* Change background on hover */
 }
 
 /* Responsive Styles */
