@@ -15,7 +15,8 @@ const Podcasts = () => {
   const [sortOrder, setSortOrder] = useState('All');
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [favorites, setFavorites] = useState([]);
-  const [dateSortOrder, setDateSortOrder] = useState('latest'); // State to track date sort order
+  const [dateSortOrder, setDateSortOrder] = useState('latest'); 
+  const [podcastDetails, setPodcastDetails] = useState({});
 
   // Retrieve favorites from localStorage on initial load
   useEffect(() => {
@@ -33,7 +34,7 @@ const Podcasts = () => {
         }
         const podcastsData = await podcastsResponse.json();
         setPodcasts(podcastsData);
-        setDisplayPodcasts(podcastsData); // Show immediately without sorting
+        setDisplayPodcasts(podcastsData); 
 
         const uniqueGenreIds = [...new Set(podcastsData.flatMap(podcast => podcast.genres))];
         const genrePromises = uniqueGenreIds.map(id =>
@@ -47,6 +48,18 @@ const Podcasts = () => {
 
         localStorage.setItem('genres', JSON.stringify(genresObject));
         setGenres(genresObject);
+
+        // Fetch episodes for each podcast
+        const podcastPromises = podcastsData.map(podcast => 
+          fetch(`https://podcast-api.netlify.app/id/${podcast.id}`).then(res => res.json())
+        );
+        console.log(podcastPromises)
+        const podcastsWithEpisodes = await Promise.all(podcastPromises);
+        const detailsObject = {};
+        podcastsWithEpisodes.forEach((detail, index) => {
+          detailsObject[podcastsData[index].id] = detail;
+        });
+        setPodcastDetails(detailsObject);
 
         // Delay for sorting by 1 second
         setTimeout(() => {
@@ -154,6 +167,7 @@ const Podcasts = () => {
               <div className='last-update'>Last Update: {post.updated.slice(0, 10)}</div>
               <div>Genres: {post.genres.map(id => genres[id]?.title).join(', ')}</div>
               <div>Seasons: {post.seasons}</div>
+              <div style={{ marginBottom: '8px' }}>Episodes: {podcastDetails[post.id]?.totalEpisodes || 'Loading...'}</div>
             </div>  
 
             <div className='podcast-likes' onClick={() => toggleFavorite(post)}>
@@ -167,6 +181,7 @@ const Podcasts = () => {
 };
 
 export default Podcasts;
+
 
 
 
