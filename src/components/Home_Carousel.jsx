@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import "./Style/Home_carousel.css";
+import { Link } from 'react-router-dom';
 
-const Posts = () => {
-  const [posts, setPosts] = useState([]);
+const Carousel = () => {
+  const [podcasts, setPodcasts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchPodcasts = async () => {
       try {
         const response = await fetch('https://podcast-api.netlify.app');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setPosts(data);
+        setPodcasts(data);
       } catch (error) {
         setError(error);
       } finally {
@@ -23,15 +24,23 @@ const Posts = () => {
       }
     };
 
-    fetchPosts();
+    fetchPodcasts();
   }, []);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % podcasts.length);
+    }, 3000); // Slide every 3 seconds
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
+  }, [podcasts.length]);
+
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % posts.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % podcasts.length);
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + posts.length) % posts.length);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + podcasts.length) % podcasts.length);
   };
 
   if (loading) {
@@ -47,25 +56,29 @@ const Posts = () => {
       <h1 className='heading'>Podcast</h1>
       <div className='carousel'>
         <button className='arrow left' onClick={handlePrev}>&lt;</button>
-        
-        <ul className='list-container'>
-          {posts.map((post, index) => (
-            <li 
-              className='list-style' 
-              key={post.id} 
-              style={{display: index === currentIndex ? 'block' : 'none' }}
-            >
-              <h2>{post.title}</h2>
-              <p>{post.body}</p>
-              <img className='podcast-image' src={post.image} alt='podcast image' />
-            </li>
-          ))}
-        </ul>
-
+        <Link to={'/podcast-list'}>
+          <ul className='list-container'>
+            {podcasts.map((podcast, index) => (
+              <li 
+                className='list-style' 
+                key={podcast.id} 
+                style={{ display: index === currentIndex ? 'block' : 'none' }}
+              >
+                <h2>{podcast.title}</h2>
+                <p>{podcast.body}</p>
+                <img className='podcast-image' src={podcast.image} alt='podcast' />
+              </li>
+            ))}
+          </ul>
+        </Link>
         <button className='arrow right' onClick={handleNext}>&gt;</button>
       </div>
+      {/* View More button below the carousel */}
+      <Link to={'/podcast-list'}>
+        <button className='view-more-button'>View More</button>
+      </Link>
     </div>
   );
 };
 
-export default Posts;
+export default Carousel;
