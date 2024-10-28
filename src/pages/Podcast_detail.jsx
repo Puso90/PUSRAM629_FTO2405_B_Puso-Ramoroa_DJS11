@@ -3,8 +3,6 @@ import { useParams } from 'react-router-dom'; // Import useParams to get the ID 
 import Header from "../components/header";
 import Footer from "../components/footer";
 import PodcastShows from "../components/PodcastShows";
-import Slider from 'react-slick';
-import Audio from '../components/Audio';
 
 const PodcastDetail = () => {
     const { id } = useParams(); // Get the podcast ID from the URL parameters
@@ -21,6 +19,7 @@ const PodcastDetail = () => {
               throw new Error('Network response was not ok');
             }
             const data = await response.json();
+            //console.log(data)
             setPodcast(data); // Set the fetched podcast data in state
           } catch (error) {
             setError(error); // Set error state if fetch fails
@@ -50,7 +49,7 @@ const PodcastDetail = () => {
                 <img src={podcast.image} style={{ width: '300px', height: '300px' }} alt='Podcast' /> {/* Display podcast image */}
                 <p>{podcast.description}</p> {/* Display podcast description */}
                 <PodcastShows id={id} /> {/* Pass podcast ID to PodcastShows component */}
-            </div>
+                </div>
             <Footer /> {/* Render footer */}
         </>
     );

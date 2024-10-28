@@ -3,35 +3,41 @@ CAOUSAL FOR PODCASTS DISPLAYED
 ___________________________________*/
 
 .carousel {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  
-  .arrow {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-  }
-  
-  .list-container {
-    display: flex;
-    flex-direction: row;
-    transition: transform 0.5s ease;
-  }
-  
-  .list-style {
-    list-style: none;
-    text-align: center;
-    width: 350px; /* Adjust as needed */
-  }
-  
-  /* 
-  - Instead of adding size on BlogPost.jsx
-  - This seems cleaner and better maintainable 
-  */
-  .podcast-image {
-    width: 300px;
-    height: 300px;
-  }
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.arrow {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: row;
+  transition: transform 0.5s ease;
+}
+
+.list-style {
+  list-style: none; /* Remove default list styling */
+  text-align: center;
+  width: 350px; /* Adjust as needed */
+  color: black;
+}
+
+.podcast-link {
+  text-decoration: none; /* Remove underline from links */
+  color: inherit; /* Inherit text color from parent */
+}
+
+/* 
+- Instead of adding size on BlogPost.jsx
+- This seems cleaner and better maintainable 
+*/
+.podcast-image {
+  width: 300px;
+  height: 300px;
+}
