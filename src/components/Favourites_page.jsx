@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Header from "./header";
-import Footer from "./footer";
 import { Link } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 
@@ -30,7 +28,6 @@ export default function Favourites() {
     
     return (
         <>
-            <Header />
             <h1>Favourites</h1>
             <ul>
                 {likedPodcasts.length === 0 ? (
@@ -61,7 +58,6 @@ export default function Favourites() {
                     ))
                 )}
             </ul>
-            <Footer />
         </>
     );
 }
