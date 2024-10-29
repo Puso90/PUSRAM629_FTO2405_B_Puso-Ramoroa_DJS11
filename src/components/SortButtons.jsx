@@ -21,9 +21,7 @@ export default function SortButtons({ onSort, dateSortOrder }) {
                 Sort: {dateSortOrder === 'latest' ? 'Oldest' : 'Latest'}
             </button>
 
-            <button onClick={() => onSort('Favorites')}>
-                <FaHeart /> Favorites
-            </button>
+           
         </div>
     );
 }
