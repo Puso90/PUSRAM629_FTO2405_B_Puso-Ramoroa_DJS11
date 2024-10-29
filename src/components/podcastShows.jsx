@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'; // React and hooks for state and lifecycle management
 import Slider from 'react-slick'; // Slick carousel for episode display
-import Audio from '../components/Audio'; // Audio component to handle audio playback
+import Audio from './Audio'; // Audio component to handle audio playback
 import '../components/Style/podcastShowsStyle.css';
 
 // Import Slick carousel CSS for styling
