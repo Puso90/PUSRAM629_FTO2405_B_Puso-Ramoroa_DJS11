@@ -34,12 +34,6 @@ export default function Header() {
 
                     <div>
                         <Link to={'/podcast-list'}>
-                            Podcasts
-                        </Link>
-                    </div>
-
-                    <div className="shows-button podcast-detail">
-                        <Link to={'/podcast/:id'}>
                             Shows
                         </Link>
                     </div>

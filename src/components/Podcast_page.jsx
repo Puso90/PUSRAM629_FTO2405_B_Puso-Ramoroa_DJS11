@@ -35,7 +35,7 @@ const Podcasts = () => {
         const podcastsData = await podcastsResponse.json();
         setPodcasts(podcastsData);
         setDisplayPodcasts(podcastsData); 
-
+  
         const uniqueGenreIds = [...new Set(podcastsData.flatMap(podcast => podcast.genres))];
         const genrePromises = uniqueGenreIds.map(id =>
           fetch(`https://podcast-api.netlify.app/genre/${id}`).then(res => res.json())
@@ -45,39 +45,48 @@ const Podcasts = () => {
           acc[genre.id] = genre;
           return acc;
         }, {});
-
+  
         localStorage.setItem('genres', JSON.stringify(genresObject));
         setGenres(genresObject);
-
+  
         // Fetch episodes for each podcast
         const podcastPromises = podcastsData.map(podcast => 
           fetch(`https://podcast-api.netlify.app/id/${podcast.id}`).then(res => res.json())
         );
-        console.log(podcastPromises)
         const podcastsWithEpisodes = await Promise.all(podcastPromises);
         const detailsObject = {};
         podcastsWithEpisodes.forEach((detail, index) => {
           detailsObject[podcastsData[index].id] = detail;
         });
         setPodcastDetails(detailsObject);
-
-        // Delay for sorting by 1 second
+  
+        // Delay initial sorting
         setTimeout(() => {
           setSortOrder('A-Z');
           setDisplayPodcasts([...podcastsData].sort((a, b) => a.title.localeCompare(b.title)));
-        }, 3000);
-
+        }, 1000); // Adjust delay time as needed
+  
       } catch (error) {
         setError(error);
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchData();
   }, []);
+  
 
-  // Toggle favorite podcast
+  // Update displayPodcasts whenever selectedGenre changes
+  useEffect(() => {
+    if (selectedGenre) {
+      const filteredPodcasts = podcasts.filter(podcast => podcast.genres.includes(selectedGenre));
+      setDisplayPodcasts(filteredPodcasts);
+    } else {
+      setDisplayPodcasts(podcasts);
+    }
+  }, [selectedGenre, podcasts]);
+
   const toggleFavorite = (podcast) => {
     let updatedFavorites = [];
     if (favorites.includes(podcast)) {
@@ -88,11 +97,11 @@ const Podcasts = () => {
     setFavorites(updatedFavorites);
     localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
   };
-  
+
   const handleSort = (order) => {
     if (order === 'All') {
       setSelectedGenre(null);
-      setDisplayPodcasts(podcasts); // Reset display to original order from API
+      setDisplayPodcasts(podcasts);
     } else if (order === 'Oldest/Latest') {
       setDateSortOrder(prevOrder => prevOrder === 'latest' ? 'oldest' : 'latest');
       setSortOrder('date');
@@ -128,6 +137,8 @@ const Podcasts = () => {
 
     return filteredPodcasts;
   };
+
+  
 
   if (loading) {
     return <div className='loading'>Loading...</div>;
@@ -181,6 +192,7 @@ const Podcasts = () => {
 };
 
 export default Podcasts;
+
 
 
 
